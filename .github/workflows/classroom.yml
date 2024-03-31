@@ -13,7 +13,11 @@ jobs:
     if: github.actor != 'github-classroom[bot]'
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4       
+    - name: add dependency
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements.extra.txt ]; then pip install -r requirements.extra.txt; fi
     - name: Module0 Test
       id: module0-test
       uses: education/autograding-command-grader@v1

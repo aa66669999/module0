@@ -31,21 +31,21 @@ class Module:
 
     def train(self) -> None:
         "Set the mode of this module and all descendent modules to `train`."
-        def _train(module):
+        def _train1(module):
             module.training = True
             for m in module.modules():
-                _train(m)
+                _train1(m)
 
-        _train(self)
+        _train1(self)
 
     def eval(self) -> None:
         "Set the mode of this module and all descendent modules to `eval`."
-        def _eval(module):
+        def _eval1(module):
             module.training = False
             for m in module.modules():
-                _eval(m)
+                _eval1(m)
 
-        _eval(self)
+        _eval1(self)
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
         """
@@ -55,13 +55,13 @@ class Module:
         Returns:
             The name and `Parameter` of each ancestor parameter.
         """
-        def _named_parameters(module, prefix=""):
+        def _named_parameters1(module, prefix=""):
             for name, param in module._parameters.items():
                 yield prefix + name, param
             for name, module in module._modules.items():
-                yield from _named_parameters(module, prefix + name + ".")
+                yield from _named_parameters1(module, prefix + name + ".")
 
-        return list(_named_parameters(self))
+        return list(_named_parameters1(self))
 
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."

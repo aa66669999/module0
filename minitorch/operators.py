@@ -125,7 +125,7 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
         A function that takes a list, applies `fn` to each element, and returns a
          new list
     """
-    return lambda list: [fn(x) for x in list]
+    return lambda list: [fn(a) for a in list]
 
 
 def negList(ls: Iterable[float]) -> Iterable[float]:
@@ -148,7 +148,7 @@ def zipWith(
          applying fn(x, y) on each pair of elements.
 
     """
-    return lambda ls1, ls2: (fn(x, y) for x, y in zip(ls1, ls2))
+    return lambda ls1, ls2: (fn(a, b) for a, b in zip(ls1, ls2))
 
 
 def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
@@ -171,13 +171,13 @@ def reduce(
          $x_1 \ldots x_n$ and computes the reduction :math:`fn(x_3, fn(x_2,
          fn(x_1, x_0)))`
     """
-    def _reduce(ls, fn, start):
+    def _reduce1(ls, fn, start):
         iterator = iter(ls)
         for i in iterator:
             start = fn(start, i)
         return start
 
-    return lambda ls: _reduce(ls, fn, start)
+    return lambda ls: _reduce1(ls, fn, start)
 
 
 def sum(ls: Iterable[float]) -> float:
