@@ -22,7 +22,7 @@ def id(x: float) -> float:
 
 def add(x: float, y: float) -> float:
     "$f(x, y) = x + y$"
-    return x+y
+    return x + y
 
 
 def neg(x: float) -> float:
@@ -32,17 +32,17 @@ def neg(x: float) -> float:
 
 def lt(x: float, y: float) -> float:
     "$f(x) =$ 1.0 if x is less than y else 0.0"
-    return 1.0 if x<y else 0.0
+    return 1.0 if x < y else 0.0
 
 
 def eq(x: float, y: float) -> float:
     "$f(x) =$ 1.0 if x is equal to y else 0.0"
-    return 1.0 if x==y else 0.0
+    return 1.0 if x == y else 0.0
 
 
 def max(x: float, y: float) -> float:
     "$f(x) =$ x if x is greater than y else y"
-    return x if x>y else y
+    return x if x > y else y
 
 
 def is_close(x: float, y: float) -> float:
@@ -62,7 +62,7 @@ def sigmoid(x: float) -> float:
 
     for stability.
     """
-    return 1.0/(1.0+exp(-x))
+    return 1.0 / (1.0 + exp(-x))
 
 
 def relu(x: float) -> float:
@@ -71,7 +71,7 @@ def relu(x: float) -> float:
 
     (See https://en.wikipedia.org/wiki/Rectifier_(neural_networks) .)
     """
-    return x if x>0 else 0
+    return x if x > 0 else 0
 
 
 EPS = 1e-6
@@ -89,22 +89,22 @@ def exp(x: float) -> float:
 
 def log_back(x: float, d: float) -> float:
     r"If $f = log$ as above, compute $d \times f'(x)$"
-    return d/x+EPS
+    return d / x + EPS
 
 
 def inv(x: float) -> float:
     "$f(x) = 1/x$"
-    return 1.0/x
+    return 1.0 / x
 
 
 def inv_back(x: float, d: float) -> float:
     r"If $f(x) = 1/x$ compute $d \times f'(x)$"
-    return -d/(x**2)
+    return -d / (x**2)
 
 
 def relu_back(x: float, d: float) -> float:
     r"If $f = relu$ compute $d \times f'(x)$"
-    return d if x>0 else 0
+    return d if x > 0 else 0
 
 
 # ## Task 0.3
@@ -131,6 +131,7 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
 def negList(ls: Iterable[float]) -> Iterable[float]:
     "Use `map` and `neg` to negate each element in `ls`"
     return map(neg)(ls)
+
 
 def zipWith(
     fn: Callable[[float, float], float]
@@ -171,6 +172,7 @@ def reduce(
          $x_1 \ldots x_n$ and computes the reduction :math:`fn(x_3, fn(x_2,
          fn(x_1, x_0)))`
     """
+
     def _reduce1(ls, fn, start):
         iterator = iter(ls)
         for i in iterator:
